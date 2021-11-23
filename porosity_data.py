@@ -15,8 +15,10 @@ for sample in os.listdir(path):
 
             # Ignores the files not containing the relevant scans
             if "Ebene" in scan:
-
+                print(scan)
                 # Loops the scans of each surface
-                for surface in os.listdir(path + sample + "/" + element + "/" + scan):
-                    print(surface)
+                #for surface in os.listdir(path + sample + "/" + element + "/" + scan):
+                    #print(surface)
+                    #if surface.endswith(".jpg"):
+                        #image = Image.open()
                 
