@@ -4,6 +4,11 @@ import os
 # Path of the folder, which contains the CT-Scans of all the samples 
 path = "C:/Users/User/Desktop/CT Scans Final/"
 
+# Variables for porosity calculation
+red_pixel_count = 0
+colored_pixel_count = 0
+black_pixel_count = 0
+
 # Loops the samples
 for sample in os.listdir(path):
 
@@ -21,5 +26,23 @@ for sample in os.listdir(path):
                     
                     # Checks for .jpg file
                     if scan.endswith(".jpg"):
+
+                        # Opens the current scan
                         image = Image.open(path + sample + "/" + element + "/" + surface + "/" + scan)
-                
+                        img_width, img_height = image.size
+                        img_pixel = image.load()
+
+                        # Loops the individual pixels
+                        for j in range (0, img_height):
+                            for i in range(0, img_width):
+                                if img_pixel[i ,j] != (0, 0, 0):
+                                    colored_pixel_count = colored_pixel_count + 1
+                                if img_pixel[i, j] == (254, 0, 0):
+                                    red_pixel_count = red_pixel_count + 1
+                                if img_pixel[i, j] == (0, 0, 0):
+                                    black_pixel_count = black_pixel_count +1
+
+                        # Calculates porosity   
+                        # img_pixel_total = img_height * img_width
+                        porosity =((black_pixel_count / (colored_pixel_count - red_pixel_count))) * 100   
+                        print(str(porosity) + " % " + scan)
