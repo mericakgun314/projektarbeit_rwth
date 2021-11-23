@@ -11,14 +11,15 @@ for sample in os.listdir(path):
     for element in os.listdir(path + sample):
 
         # Loops the 3 surfaces of each element
-        for scan in os.listdir(path + sample + "/" + element):
+        for surface in os.listdir(path + sample + "/" + element):
 
             # Ignores the files not containing the relevant scans
-            if "Ebene" in scan:
-                print(scan)
+            if "Ebene" in surface:
+                
                 # Loops the scans of each surface
-                #for surface in os.listdir(path + sample + "/" + element + "/" + scan):
-                    #print(surface)
-                    #if surface.endswith(".jpg"):
-                        #image = Image.open()
+                for scan in os.listdir(path + sample + "/" + element + "/" + surface):
+                    
+                    # Checks for .jpg file
+                    if scan.endswith(".jpg"):
+                        image = Image.open(path + sample + "/" + element + "/" + surface + "/" + scan)
                 
