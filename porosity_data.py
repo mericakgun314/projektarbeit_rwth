@@ -15,16 +15,18 @@ ws = wb.active
 red_pixel_count = 0
 colored_pixel_count = 0
 black_pixel_count = 0
+counter_element = 0
+
 
 # Loops the samples
 for sample in os.listdir(path):
 
     # Loops the 15 elements of each sample
     for element in os.listdir(path + sample):
-
+        counter_element = counter_element + 1
         # Loops the 3 surfaces of each element
         for surface in os.listdir(path + sample + "/" + element):
-
+            
             # Ignores the files not containing the relevant scans
             if "Ebene" in surface:
                 
@@ -51,5 +53,8 @@ for sample in os.listdir(path):
 
                         # Calculates porosity   
                         # img_pixel_total = img_height * img_width
-                        porosity =((black_pixel_count / (colored_pixel_count - red_pixel_count))) * 100   
+                        porosity =((black_pixel_count / (colored_pixel_count - red_pixel_count))) * 100
+
+                        ws["A" + str(counter_element)] = element
+                        wb.save("porosity_data_sample_1.xlsx")
                         print(str(porosity) + " % " + scan)
