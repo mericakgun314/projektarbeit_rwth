@@ -1,8 +1,15 @@
 from PIL import Image
 import os
+import pandas
+from openpyxl.workbook import Workbook
+from openpyxl import load_workbook
 
 # Path of the folder, which contains the CT-Scans of all the samples 
 path = "C:/Users/User/Desktop/CT Scans Final/"
+
+# Opens Excel file
+wb = load_workbook("porosity_data_sample_1.xlsx")
+ws = wb.active
 
 # Variables for porosity calculation
 red_pixel_count = 0
