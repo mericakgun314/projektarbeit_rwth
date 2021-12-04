@@ -10,10 +10,19 @@ from tkinter import filedialog
 root = tk.Tk()
 root.withdraw()
 
-files = filedialog.askdirectory()
-print(files)
+file = filedialog.askopenfilename()
+
+wb = load_workbook(file)
+ws = wb.active
 
 
+for row in ws.iter_rows(min_row=2, max_row=2, max_col=4):
+    for cell in row:
+        print(cell.value)
+
+
+
+wb.save(file)
 
 
 
