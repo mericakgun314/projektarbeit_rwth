@@ -4,6 +4,23 @@ from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 
+import tkinter as tk
+from tkinter import filedialog
+
+root = tk.Tk()
+root.withdraw()
+
+files = filedialog.askdirectory()
+print(files)
+
+
+
+
+
+
+
+
+'''
 path = "C:/Users/User/Desktop/CT Scans Final/1/1 1/Ebene 1/"
 
 
@@ -21,3 +38,4 @@ b = len([scan for scan in os.listdir(path)])
 print(b)
 
 wb.save("porosity_data_sample_1_backup.xlsx")
+'''

@@ -3,11 +3,17 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 import os
 from PIL import Image
-import math
+import tkinter as tk
+from tkinter import filedialog
 
-# Path of the folder, which contains the CT-Scans of all the samples 
-path = "C:/Users/User/Desktop/CT Scans Final/1/1 1/"
+# Prompts the file explorer, which contains the scans
+root = tk.Tk()
+root.withdraw()
 
+# Path of the folder, which contains the CT-Scans of all the samples
+path = filedialog.askdirectory() + "/"
+
+# Initializes Excel workbook and worksheet
 wb = Workbook()
 ws = wb.active
 
