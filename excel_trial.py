@@ -7,8 +7,10 @@ from PIL import Image
 # Path of the folder, which contains the CT-Scans of all the samples 
 path = "C:/Users/User/Desktop/CT Scans Final/1/1 1/"
 
-wb = load_workbook("porosity_data_sample_1.xlsx")
+# wb = load_workbook("porosity_data_sample_1.xlsx")
+wb = Workbook()
 ws = wb.active
+# ws1 = wb.create_sheet("Sample" + str(path.split("/")[6]) + "Porosity")
 
 red_pixel_count = 0
 colored_pixel_count = 0
@@ -21,9 +23,9 @@ for ebene in os.listdir(path):
         ws["A1"] = str(path.split("/")[6])
         ws.merge_cells("A1:A3")
         ws["A1"].alignment = Alignment(horizontal='center', vertical='center')
-
         ws["B" + str(ebene.split()[1])] = str(ebene)
-        wb.save("porosity_data_sample_1.xlsx")
+        
+        wb.save("porosity_data_sample_" + str(path.split("/")[6]).split(" ")[0] + "_" + str(path.split("/")[6]).split(" ")[1] + ".xlsx")
 
         for scan in os.listdir(path + ebene):
             
