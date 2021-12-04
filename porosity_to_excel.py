@@ -3,29 +3,27 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 import os
 from PIL import Image
+import math
 
 # Path of the folder, which contains the CT-Scans of all the samples 
 path = "C:/Users/User/Desktop/CT Scans Final/1/1 1/"
 
-# wb = load_workbook("porosity_data_sample_1.xlsx")
 wb = Workbook()
 ws = wb.active
-# ws1 = wb.create_sheet("Sample" + str(path.split("/")[6]) + "Porosity")
 
 red_pixel_count = 0
 colored_pixel_count = 0
 black_pixel_count = 0
-counter_element = 0
+counter = 0
 
 for ebene in os.listdir(path):
-
+    
     if "Ebene" in ebene:
+        # Creates the headlines for the table
         ws["A1"] = str(path.split("/")[6])
         ws.merge_cells("A1:A3")
         ws["A1"].alignment = Alignment(horizontal='center', vertical='center')
         ws["B" + str(ebene.split()[1])] = str(ebene)
-        
-        wb.save("porosity_data_sample_" + str(path.split("/")[6]).split(" ")[0] + "_" + str(path.split("/")[6]).split(" ")[1] + ".xlsx")
 
         for scan in os.listdir(path + ebene):
             
@@ -49,10 +47,22 @@ for ebene in os.listdir(path):
                             red_pixel_count = red_pixel_count + 1
                         if img_pixel[i, j] == (0, 0, 0):
                             black_pixel_count = black_pixel_count +1
-                        
+                
                 # Calculates porosity   
                 img_pixel_total = img_height * img_width
                 porosity =((black_pixel_count / (colored_pixel_count - red_pixel_count))) * 100
+                
+                # Gets the number of scans
+                scan_count = len([scan for scan in os.listdir(path + ebene)])
+                
+                # Writes porosity data
+                for row in ws.iter_rows(min_row=int(ebene.split(" ")[1]), max_row=int(ebene.split(" ")[1]), max_col= (2 + scan_count)):
+                    for cell in row:
+                        if cell.value == None:
+                            cell.value = str(round(porosity, 4)) + " %"
+                            counter = counter + 1
+                            break
+                
+                wb.save("porosity_data_sample_" + str(path.split("/")[6]).split(" ")[0] + "_" + str(path.split("/")[6]).split(" ")[1] + ".xlsx")
 
-                # wb.save("porosity_data_sample_1.xlsx")
-                print(str(porosity) + " % " + scan)
+                print("Progress: " + str(counter) + " / " + str(scan_count) + ", " + str(round(((counter / scan_count) * 100), 1)) + " %")

@@ -1,21 +1,23 @@
-import numpy
 import os
 from PIL import Image
+from openpyxl.workbook import Workbook
+from openpyxl import load_workbook
+from openpyxl.styles import Alignment
 
-path = "C:/Users/User/Desktop/CT Scans Final/1/1 1/Ebene 1/1 1 Ebene 116.jpg"
+path = "C:/Users/User/Desktop/CT Scans Final/1/1 1/Ebene 1/"
 
-# image = Image.open(path)
-# img_pixel = image.load()
 
-img = numpy.asarray(Image.open(path))
-img.transpose(2,0,1).reshape(3,-1)
+wb = load_workbook("porosity_data_sample_1_backup.xlsx")
+ws = wb.active
+
 a = 0
-b = 0
-red_array =numpy.array([254, 0, 0])
 
-for i in img:
-    for j in i:
-        if (j==red_array).all():
-            b= b + 1
+for row in ws.iter_rows(min_row=2, max_row=2, max_col=4):
+    for cell in row:
+        print(cell.value)
+
+b = len([scan for scan in os.listdir(path)])
 
 print(b)
+
+wb.save("porosity_data_sample_1_backup.xlsx")
