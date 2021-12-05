@@ -21,17 +21,14 @@ def surface_selection():
     wb = load_workbook(excel_file)
     ws = wb.active
 
-    red_pixel_count = 0
-    colored_pixel_count = 0
-    black_pixel_count = 0
-    counter = 0
-
     if "Ebene" in ebene:
             # Creates the headlines for the table
             ws["A1"] = str(path.split("/")[6])
             ws.merge_cells("A1:A3")
             ws["A1"].alignment = Alignment(horizontal='center', vertical='center')
             ws["B" + str(ebene.split()[1])] = str(ebene)
+
+            counter = 0
 
             for scan in os.listdir(path):
                 
@@ -43,6 +40,10 @@ def surface_selection():
                     image = Image.open(full_path)
                     img_width, img_height = image.size
                     img_pixel = image.load()
+
+                    red_pixel_count = 0
+                    colored_pixel_count = 0
+                    black_pixel_count = 0
 
                     # Loops the individual pixels
                     for j in range (0, img_height):
@@ -80,11 +81,6 @@ def element_selection():
     # Initializes Excel workbook and worksheet
     wb = Workbook()
     ws = wb.active
-    
-    red_pixel_count = 0
-    colored_pixel_count = 0
-    black_pixel_count = 0
-    counter = 0
 
     for ebene in os.listdir(path):
         
@@ -94,6 +90,8 @@ def element_selection():
             ws.merge_cells("A1:A3")
             ws["A1"].alignment = Alignment(horizontal='center', vertical='center')
             ws["B" + str(ebene.split()[1])] = str(ebene)
+
+            counter = 0
 
             for scan in os.listdir(path + ebene):
                 
@@ -105,6 +103,10 @@ def element_selection():
                     image = Image.open(full_path)
                     img_width, img_height = image.size
                     img_pixel = image.load()
+
+                    red_pixel_count = 0
+                    colored_pixel_count = 0
+                    black_pixel_count = 0
 
                     # Loops the individual pixels
                     for j in range (0, img_height):
@@ -124,7 +126,7 @@ def element_selection():
                     scan_count = len([scan for scan in os.listdir(path + ebene)])
                     
                     # Writes porosity data
-                    for row in ws.iter_rows(min_row=int(ebene.split(" ")[1]), max_row=int(ebene.split(" ")[1]), max_col= (2 + scan_count)):
+                    for row in ws.iter_rows(min_row=int(ebene.split(" ")[1]), max_row=int(ebene.split(" ")[1]), min_col=2, max_col= (2 + scan_count)):
                         for cell in row:
                             if cell.value == None:
                                 cell.value = str(round(porosity, 4)) + " %"
