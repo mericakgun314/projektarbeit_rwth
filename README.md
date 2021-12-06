@@ -1,2 +1,3 @@
-### Projektarbeit an der RWTH
-This program written in Python analyzes the porosity data from textile reinforced concrete samples. 
+### Python Program for the Projectwork at the RWTH University
+## Summary of the projectwork
+This program written in Python analyzes the porosity data from textile reinforced concrete samples. For the projectwork a total of 4 textile reinforced concrete(TRC) samples were manufactured and were cut to 15 individual pieces each. These 60 TRC samples were scanned by a CT machine in order to determine and analyze the placement of the textile in the concrete, as well as the porosity of the samples, which presenets itself as black spots in a CT-Scan. This program gathers the porosity data from each scan using the Python Imaging Library, organizes using pandas, exports them to Excel files using openpyxl, and finally creates visual representations, such as graphs and charts, using Matplotlib.
