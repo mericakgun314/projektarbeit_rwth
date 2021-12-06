@@ -1,6 +1,5 @@
 from PIL import Image
 import os
-import pandas
 from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 
