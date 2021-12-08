@@ -10,7 +10,7 @@ root.withdraw()
 
 print("Select a surface folder:")
 path = filedialog.askdirectory() + "/"
-
+print("Processing...")
 counter = 1
 dataframe_list = []
 
@@ -36,10 +36,12 @@ for scan in os.listdir(path):
         
         dataframe_list.append(df)
         
-        print(df)
         counter = counter + 1
-        
+        print(df)
         if counter == 3:
             break
 
-print(dataframe_list)          
+df_all = pd.concat([dataframe_list[0], dataframe_list[1]], sort=False, axis=1)
+to_excel = df_all.to_excel("modified.xlsx")
+
+print(df_all)  
