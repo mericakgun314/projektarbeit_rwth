@@ -2,6 +2,7 @@ from PIL import Image
 import os
 from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
+import time
 
 # Loops through the scans pixel by pixel using PIL.
 # Extracts the color information each pixel.
@@ -44,6 +45,8 @@ for sample in os.listdir(path):
                         img_width, img_height = image.size
                         img_pixel = image.load()
 
+                        start = time.perf_counter()
+
                         # Loops the individual pixels
                         for j in range (0, img_height):
                             for i in range(0, img_width):
@@ -53,6 +56,10 @@ for sample in os.listdir(path):
                                     red_pixel_count = red_pixel_count + 1
                                 if img_pixel[i, j] == (0, 0, 0):
                                     black_pixel_count = black_pixel_count +1
+
+                        end = time.perf_counter()
+                        time_passed = round((end - start), 2)
+                        # Add timer print() func
 
                         # Calculates porosity   
                         # img_pixel_total = img_height * img_width

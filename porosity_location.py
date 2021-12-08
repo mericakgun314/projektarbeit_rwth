@@ -4,6 +4,8 @@ import os
 import tkinter as tk
 from tkinter import filedialog
 import pandas as pd
+import time
+import datetime
 
 # Loops through the scans to get the location data of the desired pixels using PIL
 # Combines the dataframes of each scan to one dataframe and saves them as an Excel file using Openpyxl
@@ -27,6 +29,8 @@ for scan in os.listdir(path):
         graph_list_red = []
         graph_list_black = []
 
+        start = time.perf_counter()
+
         for j in range (0, img_height):
             for i in range(0, img_width):
                 if img_pixel[i, j] == (254, 0, 0):
@@ -34,17 +38,24 @@ for scan in os.listdir(path):
                 if img_pixel[i, j] == (0, 0, 0):
                     graph_list_black.append([i, j])
 
+        end = time.perf_counter()
+        time_passed = round((end - start), 2)
+
         df = pd.DataFrame(graph_list_black)
         df.columns = ["X" + str(counter) + "E" + path.split("/")[7].split(" ")[1], "Y" + str(counter) + "E" + path.split("/")[7].split(" ")[1]]
         
         dataframe_list.append(df)
         
+        scan_count = len([scan for scan in os.listdir(path)])
+        if counter  == 1:
+            print(str(counter) + " / " + str(scan_count) + ", Time Remaining: " + str(datetime.timedelta(seconds=time_passed*scan_count)))
+
+        print(str(counter) + " / " + str(scan_count))
         counter = counter + 1
-        print(df)
+
+        # Delete this for all the scans
         if counter == 3:
             break
 
-df_all = pd.concat([dataframe_list[0], dataframe_list[1]], sort=False, axis=1)
-to_excel = df_all.to_excel("modified.xlsx")
-
-print(df_all)  
+df_all = pd.concat([i for i in dataframe_list], sort=False, axis=1)
+to_excel = df_all.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + ".xlsx")
