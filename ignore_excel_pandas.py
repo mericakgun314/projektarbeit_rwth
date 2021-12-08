@@ -2,7 +2,7 @@ import pandas as pd
 from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 import os
-import itertools
+import pathlib
 
 wb = load_workbook("porosity_data_sample_1_1.xlsx")
 ws = wb.active
@@ -29,8 +29,11 @@ for cell in ws[1]:
 
 ws["A1"].value = None
 
-wb.save("delete_column.xlsx")
+pathlib.Path("/df_1").mkdir(exist_ok=True)
+# os.mkdir("df_1")
 
-df = pd.read_excel("df/delete_column.xlsx")
+wb.save("df_1/delete_column.xlsx")
 
-print(df)
+# df = pd.read_excel("df_1/delete_column.xlsx")
+
+# print(df)

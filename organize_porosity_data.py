@@ -1,4 +1,3 @@
-import pandas as pd
 from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 import os
@@ -32,5 +31,4 @@ for file in os.listdir("C:/Users/User/Documents/github_repos/projektarbeit_rwth/
 
         ws["A1"].value = None
 
-        wb.save("df_" + file_split[3] + "_" + file_split[4])
-
+        wb.save("df_" + file_split[3] + "/df_" + file_split[3] + "_" + file_split[4])
