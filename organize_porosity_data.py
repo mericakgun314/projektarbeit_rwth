@@ -2,6 +2,9 @@ from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 import os
 
+# Organizes the Excel files, which are created by "porosity_to_excel.py".
+# Adds columns, headers and saves these Excel files as new and relocates them into their respective folder.
+
 for file in os.listdir("C:/Users/User/Documents/github_repos/projektarbeit_rwth/"):
     if file.endswith(".xlsx"):
         wb = load_workbook(file)

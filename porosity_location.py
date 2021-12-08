@@ -5,6 +5,9 @@ import tkinter as tk
 from tkinter import filedialog
 import pandas as pd
 
+# Loops through the scans to get the location data of the desired pixels using PIL
+# Combines the dataframes of each scan to one dataframe and saves them as an Excel file using Openpyxl
+
 root = tk.Tk()
 root.withdraw()
 

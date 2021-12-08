@@ -6,6 +6,11 @@ from PIL import Image
 import tkinter as tk
 from tkinter import filedialog
 
+# Loops through the scans pixel by pixel using PIL.
+# Extracts the color information each pixel.
+# With this information, the porosity percentage of each scan is calculated.
+# Saves these information to Excel files for each element.
+
 # Prompts the file explorer, which contains the scans
 root = tk.Tk()
 root.withdraw()

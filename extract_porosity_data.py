@@ -3,6 +3,10 @@ import os
 from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 
+# Loops through the scans pixel by pixel using PIL.
+# Extracts the color information each pixel.
+# With this information, the porosity percentage of each scan is calculated.
+
 # Path of the folder, which contains the CT-Scans of all the samples 
 path = "C:/Users/User/Desktop/CT Scans Final/"
 
