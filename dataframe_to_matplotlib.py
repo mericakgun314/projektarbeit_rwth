@@ -4,6 +4,8 @@ from openpyxl import load_workbook
 import os
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+import tkinter as tk
+from tkinter import filedialog
 
 # Plots a scatter graph of the porosity for a visual representation using Matplotlib.
 # Reads the Excel file, which is created by "porosity_location.py" using Openpyxl, and converts it to a pandas dataframe.
@@ -11,7 +13,22 @@ import matplotlib.pyplot as plt
 
 element_input = input("Which element ? (1_1, 1_3 format): ")
 
-df = pd.read_excel("pixel_location_data/sample_1/pixel_location_ebene3_" + str(element_input) + ".xlsx") # Change accordingly
+root = tk.Tk()
+root.withdraw()
+
+print("Select a sample folder containing porosity location data:")
+path = filedialog.askdirectory() + "/"
+
+layer = input("Number of layers to plot: ")
+
+for file in os.listdir(path):
+    if element_input in file:
+        if "first" in file:
+            df_1 = pd.read_excel(path + file)
+        elif "second" in file:
+            df_2 = pd.read_excel(path + file)    
+
+df_all = pd.concat([df_1, df_2], axis=1)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection="3d")
@@ -19,7 +36,7 @@ ax.set_xlabel("x axis")
 ax.set_ylabel("y axis")
 ax.set_zlabel("z axis")
 
-for i in range(1, 3):
-    ax.scatter(df.loc[:,"X" + str(i) + "E3"], df.loc[:,"Y" + str(i) + "E3"], i, c="black", marker="o", s=0.01)
+for i in range(1, int(layer) + 1):
+    ax.scatter(df_all.loc[:,"X" + str(i) + "E3"], df_all.loc[:,"Y" + str(i) + "E3"], i, c="black", marker="o", s=0.01)
 
 plt.show()

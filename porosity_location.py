@@ -57,12 +57,12 @@ for scan in os.listdir(path):
         # Delete this for all the scans
         if counter == (math.floor((scan_count/2) + 1)):
             df_all_1 = pd.concat([i for i in dataframe_list], sort=False, axis=1)
-            to_excel = df_all_1.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + "_" +  str(math.floor(scan_count/2)) +  ".xlsx")
+            to_excel = df_all_1.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + "_" +  "first_" +  ".xlsx")
             print("First half completed.")
             dataframe_list = [] 
         elif counter == (scan_count + 1):
             df_all_2 = pd.concat([i for i in dataframe_list], sort=False, axis=1)
-            to_excel = df_all_2.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + "_" +  str(scan_count) + ".xlsx")  
+            to_excel = df_all_2.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + "_" + "second_" + ".xlsx")  
             print("Second half completed.")
 
 # df_all = pd.concat([i for i in dataframe_list], sort=False, axis=1)
