@@ -6,6 +6,7 @@ from tkinter import filedialog
 import pandas as pd
 import time
 import datetime
+import math
 
 # Loops through the scans to get the location data of the desired pixels using PIL
 # Combines the dataframes of each scan to one dataframe and saves them as an Excel file using Openpyxl
@@ -48,14 +49,21 @@ for scan in os.listdir(path):
         
         scan_count = len([scan for scan in os.listdir(path)])
         if counter  == 1:
-            print(str(counter) + " / " + str(scan_count) + ", Time Remaining: " + str(datetime.timedelta(seconds=time_passed*scan_count)))
+            print("Time Remaining: " + str(str((datetime.timedelta(seconds=time_passed*scan_count))).split(":")[1]) + " Minutes")
 
         print(str(counter) + " / " + str(scan_count))
         counter = counter + 1
 
         # Delete this for all the scans
-        if counter == 3:
-            break
+        if counter == (math.floor((scan_count/2) + 1)):
+            df_all_1 = pd.concat([i for i in dataframe_list], sort=False, axis=1)
+            to_excel = df_all_1.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + "_" +  str(math.floor(scan_count/2)) +  ".xlsx")
+            print("First half completed.")
+            dataframe_list = [] 
+        elif counter == (scan_count + 1):
+            df_all_2 = pd.concat([i for i in dataframe_list], sort=False, axis=1)
+            to_excel = df_all_2.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + "_" +  str(scan_count) + ".xlsx")  
+            print("Second half completed.")
 
-df_all = pd.concat([i for i in dataframe_list], sort=False, axis=1)
-to_excel = df_all.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + ".xlsx")
+# df_all = pd.concat([i for i in dataframe_list], sort=False, axis=1)
+# to_excel = df_all.to_excel("pixel_location_data/" + "sample_" + scan.split(" ")[0] + "/" + "pixel_location_ebene3_" + scan.split(" ")[0] + "_" + scan.split(" ")[1] + ".xlsx")
