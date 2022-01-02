@@ -4,6 +4,8 @@ from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 import time
 
+# BACKUP, NOT THE MAIN FILE
+
 # Loops through the scans pixel by pixel using PIL.
 # Extracts the color information each pixel.
 # With this information, the porosity percentage of each scan is calculated.

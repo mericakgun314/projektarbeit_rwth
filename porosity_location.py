@@ -8,6 +8,8 @@ import time
 import datetime
 import math
 
+# Creates the values in the folder "pixel_location_data"
+
 # Loops through the scans to get the location data of the desired pixels using PIL
 # Combines the dataframes of each scan to one dataframe and saves them as an Excel file using Openpyxl
 

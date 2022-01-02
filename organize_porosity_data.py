@@ -2,6 +2,8 @@ from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 import os
 
+# Makes adjustments to the files in the folders "raw_sample_x", the values remain unchanged.
+
 # Organizes the Excel files, which are created by "porosity_to_excel.py".
 # Adds columns, headers and saves these Excel files as new and relocates them into their respective folder.
 

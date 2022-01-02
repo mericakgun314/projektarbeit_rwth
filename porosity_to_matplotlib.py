@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import os
 
+# BACKUP, NOT THE MAIN FILE
+
 directory = r"C:/Users/Meriç/Desktop/Ebene 3"
 
 fig = plt.figure()

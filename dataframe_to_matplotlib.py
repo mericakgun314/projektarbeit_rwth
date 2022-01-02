@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import filedialog
 
+# Uses the folder "pixel_location_data"
+
 # Plots a scatter graph of the porosity for a visual representation using Matplotlib.
 # Reads the Excel file, which is created by "porosity_location.py" using Openpyxl, and converts it to a pandas dataframe.
 # This dataframe is used to plot a scatter graph.
