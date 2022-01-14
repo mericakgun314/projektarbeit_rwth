@@ -43,4 +43,11 @@ for file in os.listdir(path):
 
         ws["A1"].value = None
 
+        for row in ws.iter_rows(min_row=2, max_row=4, min_col=2):
+            for cell in row:
+                if cell.value != None:
+                    split_cell = cell.value.split(" ")
+                    decimal = split_cell[0].replace(".", ",")
+                    cell.value = decimal
+
         wb.save("df_" + file_split[3] + "/df_" + file_split[3] + "_" + file_split[4])
