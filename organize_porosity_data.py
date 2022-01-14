@@ -1,15 +1,22 @@
 from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 import os
+import tkinter as tk
+from tkinter import filedialog
 
 # Makes adjustments to the files in the folders "raw_sample_x", the values remain unchanged.
 
 # Organizes the Excel files, which are created by "porosity_to_excel.py".
 # Adds columns, headers and saves these Excel files as new and relocates them into their respective folder.
 
-for file in os.listdir("C:/Users/User/Documents/github_repos/projektarbeit_rwth/"):
+root = tk.Tk()
+root.withdraw()
+
+path = filedialog.askdirectory() + "/"
+
+for file in os.listdir(path):
     if file.endswith(".xlsx"):
-        wb = load_workbook(file)
+        wb = load_workbook(path + file)
         ws = wb.active
 
         ws.unmerge_cells("A1:A3")
