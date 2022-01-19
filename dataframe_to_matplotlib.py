@@ -32,6 +32,28 @@ for file in os.listdir(path):
 
 df_all = pd.concat([df_1, df_2], axis=1)
 
+df_list = []
+a = 1
+
+print(df_all.iloc[:, 50:52])
+
+for i in range(1, (int(layer) * 2) + 1, 2):
+    if i >= 49:
+        i = i + 1
+    df = df_all.iloc[:, i:i+2]
+    df.drop(df.loc[df["Y" + str(a) + "E3"] >= 4575].index, inplace=True)
+    a = a + 1
+    df_list.append(df)
+
+df_all = pd.concat(df_list, axis=1)
+
+#for i in range(1, int(layer) + 1):
+    #for j in range(4603, 4611):
+        #df_all.drop(df_all.loc[df_all["Y" + str(i) + "E3"] == j].index, inplace=True)
+
+#for i in range(1, int(layer) + 1):
+    #df_all = df_all[(df_all["Y" + str(i) + "E3"] <= 4592).all(axis=1)]
+
 fig = plt.figure()
 ax = fig.add_subplot(111, projection="3d")
 ax.set_xlabel("x axis")
