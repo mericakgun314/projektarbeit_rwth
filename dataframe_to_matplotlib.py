@@ -39,6 +39,6 @@ ax.set_ylabel("y axis")
 ax.set_zlabel("z axis")
 
 for i in range(1, int(layer) + 1):
-    ax.scatter(df_all.loc[:,"X" + str(i) + "E3"], df_all.loc[:,"Y" + str(i) + "E3"], i, c="black", marker="o", s=0.01)
+    ax.scatter(df_all.loc[:,"X" + str(i) + "E3"], df_all.loc[:,"Y" + str(i) + "E3"], i, c="black", marker="o", s=0.001)
 
 plt.show()
