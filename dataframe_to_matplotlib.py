@@ -47,13 +47,6 @@ for i in range(1, (int(layer) * 2) + 1, 2):
 
 df_all = pd.concat(df_list, axis=1)
 
-#for i in range(1, int(layer) + 1):
-    #for j in range(4603, 4611):
-        #df_all.drop(df_all.loc[df_all["Y" + str(i) + "E3"] == j].index, inplace=True)
-
-#for i in range(1, int(layer) + 1):
-    #df_all = df_all[(df_all["Y" + str(i) + "E3"] <= 4592).all(axis=1)]
-
 fig = plt.figure()
 ax = fig.add_subplot(111, projection="3d")
 ax.set_xlabel("x axis")
