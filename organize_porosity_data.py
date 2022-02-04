@@ -48,6 +48,6 @@ for file in os.listdir(path):
                 if cell.value != None:
                     split_cell = cell.value.split(" ")
                     decimal = split_cell[0].replace(".", ",")
-                    cell.value = decimal
+                    cell.value = str(decimal)
 
         wb.save("df_" + file_split[3] + "/df_" + file_split[3] + "_" + file_split[4])
